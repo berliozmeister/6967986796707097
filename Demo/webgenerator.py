@@ -6,13 +6,13 @@ import posixpath
 from igraph import *
 
 import networkx as nx
-import utils
+import utils 
 import numpy as np
 import networkx.utils as nu
 import math
 import matplotlib.pyplot as plt
 
-from Crypto.Random import random as rnd
+import random as rnd
 
 urls = (
     '/(.*)', 'index'
@@ -20,16 +20,11 @@ urls = (
 
 app = web.application(urls, globals())
 render = web.template.render('templates/')
-def dummy(n):
-    G = Graph.Barabasi(n, 1, zero_appeal=1)
-    layout = G.layout_circle()
-    #svgname = "generated/graph-%s-.svg" % str(n)          
-    #G.write_svg(svgname, layout)
 
 
 def RGG(n, beta, mean_degree):
     G = nx.empty_graph(n)
-    powerLawArray = utils.powerLawArray(n, beta,mean_degree)
+    powerLawArray = utils.powerLawArray(n, beta, mean_degree)
     powerLawDegreeArray = np.array(powerLawArray, dtype = np.longlong)
     sumOfDegrees = powerLawDegreeArray.sum()
     delimiterArray = np.cumsum(powerLawDegreeArray)
@@ -40,7 +35,7 @@ def RGG(n, beta, mean_degree):
         G.add_edge(np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)),
                np.searchsorted(delimiterArray, rnd.randrange(sumOfDegrees)))
         someCounter += 1
-    txtname = "generated/adj-%s-.txt" % str(n)
+    txtname = "generated/adj-%s-%s-%s-.txt" % (str(n), str(beta), str(mean_degree))
     nx.write_adjlist(G, txtname)
     degreeSequence=sorted(nx.degree(G).values(),reverse=True)
     dmax=max(degreeSequence)
@@ -55,16 +50,16 @@ def RGG(n, beta, mean_degree):
         plt.axis('off')
         nx.draw_networkx_nodes(Gcc,pos,node_size=20)
         nx.draw_networkx_edges(Gcc,pos,alpha=0.4)
-        svgname = "generated/graph-%s-.svg" % str(n)
-        plt.savefig(svgname)
-        #plt.show()
+    svgname = "generated/graph-%s-%s-%s-.svg" % (str(n), str(beta), str(mean_degree))
+    plt.savefig(svgname)
+    #plt.show()
     
 
 
 
 class index:
     def GET(self, wtf):
-        inp = web.input(mean='10', power='2.0', size='100')
+        inp = web.input(mean='10', power='1.7', size='10000')
         RGG(int(inp.size), float(inp.power), int(inp.mean))
         return render.index(mean=inp.mean, power=inp.power, size=inp.size)
 

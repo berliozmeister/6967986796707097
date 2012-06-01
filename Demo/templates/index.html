@@ -7,11 +7,11 @@ $def with (mean, power, size)
 </head>
 <body>
 	<form action="#" method="get" enctype="multipart/form-data">
-<label for="mean_degree">Mean Degree:</label>
-<input name="mean_degree" id="mean_degree" value="$mean">
+<label for="mean">Mean Degree:</label>
+<input name="mean" id="mean" value="$mean">
 
-<label for="power_beta">Power Beta:</label>
-<input name="power_beta" id="power_beta" value="$power">
+<label for="power">Power Beta:</label>
+<input name="power" id="power" value="$power">
 
 <label for="size">Size:</label>
 <input name="size" id="size" value="$size">
@@ -19,9 +19,9 @@ $def with (mean, power, size)
 <input value="Go!" type="submit">
 </form>
 
-<img src="generated/graph-$size-.svg">
+<a href="generated/graph-$size-$power-$mean-.svg">Degree distribution plot</a>
 
-<a href="generated/adj-$size-.txt">Graph file</a>
+<a href="generated/adj-$size-$power-$mean-.txt">Graph file</a>
 
 
 </body></html>
