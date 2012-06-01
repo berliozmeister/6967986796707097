@@ -1,0 +1,27 @@
+$def with (mean, power, size)
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Demo Random Graph Generator</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<form action="#" method="get" enctype="multipart/form-data">
+<label for="mean_degree">Mean Degree:</label>
+<input name="mean_degree" id="mean_degree" value="$mean">
+
+<label for="power_beta">Power Beta:</label>
+<input name="power_beta" id="power_beta" value="$power">
+
+<label for="size">Size:</label>
+<input name="size" id="size" value="$size">
+
+<input value="Go!" type="submit">
+</form>
+
+<img src="generated/graph-$size-.svg">
+
+<a href="generated/adj-$size-.txt">Graph file</a>
+
+
+</body></html>
