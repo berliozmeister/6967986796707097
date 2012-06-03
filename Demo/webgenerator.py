@@ -21,6 +21,9 @@ urls = (
 app = web.application(urls, globals())
 render = web.template.render('templates/')
 
+if not os.path.exists('generated'):
+    os.mkdir('generated')
+    
 
 def RGG(n, beta, mean_degree):
     G = nx.empty_graph(n)
@@ -39,6 +42,7 @@ def RGG(n, beta, mean_degree):
     nx.write_adjlist(G, txtname)
     degreeSequence=sorted(nx.degree(G).values(),reverse=True)
     dmax=max(degreeSequence)
+    plt.cla()
     plt.loglog(degreeSequence,'b-',marker='o')
     plt.title("Degree rank plot")
     plt.ylabel("degree")
