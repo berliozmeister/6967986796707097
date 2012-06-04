@@ -1,3 +1,8 @@
+'''
+Created on 04.06.2012
+
+@author: berlioz
+'''
 import web
 import os
 import urllib
@@ -6,7 +11,7 @@ import posixpath
 from igraph import *
 
 import networkx as nx
-import utils 
+import utils  
 import numpy as np
 import networkx.utils as nu
 import math
@@ -42,6 +47,7 @@ def RGG(n, beta, mean_degree):
     nx.write_adjlist(G, txtname)
     degreeSequence=sorted(nx.degree(G).values(),reverse=True)
     dmax=max(degreeSequence)
+    plt.clf()
     plt.cla()
     plt.loglog(degreeSequence,'b-',marker='o')
     plt.title("Degree rank plot")
@@ -49,13 +55,14 @@ def RGG(n, beta, mean_degree):
     plt.xlabel("rank")
     if n < 1000:
         plt.axes([0.45,0.45,0.45,0.45])
+        plt.cla()
         Gcc=nx.connected_component_subgraphs(G)[0]
         pos=nx.spring_layout(Gcc)
         plt.axis('off')
         nx.draw_networkx_nodes(Gcc,pos,node_size=20)
         nx.draw_networkx_edges(Gcc,pos,alpha=0.4)
-    svgname = "generated/graph-%s-%s-%s-.svg" % (str(n), str(beta), str(mean_degree))
-    plt.savefig(svgname)
+    pngname = "generated/graph-%s-%s-%s-.png" % (str(n), str(beta), str(mean_degree))
+    plt.savefig(pngname)
     #plt.show()
     
 
