@@ -10,6 +10,9 @@ import posixpath
 
 from igraph import *
 
+import matplotlib
+matplotlib.use('Agg')
+
 import networkx as nx
 import utils  
 import numpy as np
